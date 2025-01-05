@@ -45,8 +45,8 @@ A Python-based application that integrates with the Spotify API to process and a
 
 ### Clone the repository
 ```bash
-git clone https://github.com/yourusername/spotify-data-app.git
-cd spotify-data-app
+git clone https://github.com/Abhisk1234/SpotifyKafkaStream.git
+cd SpotifyKafkaStream
 ```
 
 ## 🔑 Environment Variables
