@@ -1,0 +1,54 @@
+To download and set up Apache Kafka, follow these steps:
+
+Step 1: Install Java (Prerequisite)
+Apache Kafka requires Java 8 or later. Ensure that you have Java installed on your machine.
+
+1. Check if Java is installed:
+    java -version
+If Java is not installed, download and install the latest version of java.
+
+Step 2: Download Kafka
+
+wget https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
+
+Step 3: Extract Kafka Archive
+
+tar -xvzf kafka_2.13-3.9.0.tgz
+
+Step 4: Start Zookeeper Server (Kafka Dependency)
+
+Kafka relies on Zookeeper for coordination. You need to start the Zookeeper server before starting Kafka.
+Open a terminal/command prompt.
+Navigate to the Kafka directory (where you extracted Kafka).
+Run the following command to start Zookeeper (it’s bundled with Kafka for development purposes):
+
+cd kafka_2.13-3.9.0
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.log 2>&1 &
+
+Step 5: Start Kafka Server
+After Zookeeper is up and running, you can start the Kafka broker.
+Run the following command to start Kafka:
+nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+
+Step 6: Verify Kafka is Running
+To verify that Kafka and zookeeper is running, you can list the topics available in your Kafka server by running:
+netstat -tuln | grep 9092
+netstat -tuln | grep 2181
+
+Step 7: Create a Topic (Optional)
+To create a Kafka topic, run the following command:
+bin/kafka-topics.sh --create --topic test --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+list Topics:
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+Step 8: Produce and Consume Messages
+To produce messages to the topic:
+bin/kafka-console-producer.sh --topic my-topic --bootstrap-server localhost:9092
+// Type any messages
+
+To consume messages from the topic:
+bin/kafka-console-consumer.sh --topic my-topic --from-beginning --bootstrap-server localhost:9092
+//it will live stream your messages
+
+Now, Kafka is ready to use! You can integrate it into your applications for stream processing or messaging.
